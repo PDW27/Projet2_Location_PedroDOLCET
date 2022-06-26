@@ -1,0 +1,42 @@
+{% extends "back-office.html.twig" %}
+
+{% block title %}Liste des véhicules{% endblock %}
+
+{% block body %}
+    <h1>Liste des membres disponibles</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width:5%">id</th>
+                <th style="width:15%">pseudo</th>
+                <th style="width:10%">civilite</th>
+                <th style="width:10%">prenom</th>
+                <th style="width:10%">nom</th>
+                <th style="width:25%">email</th>
+                <th style="width:10%">role</th>
+                <th style="width:15%">actions</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            {%  for membre in membres %}
+                <tr>
+                    <td class="align-middle">{{ membre.id }}</td>
+                    <td class="align-middle">{{ membre.pseudo}}</td>
+                    <td class="align-middle">{{ membre.civilite | civilite | raw }}</td>
+                    <td class="align-middle">{{ membre.prenom}}</td>
+                    <td class="align-middle">{{ membre.nom}}</td>
+                    <td class="align-middle">{{ membre.email}}</td>
+                    <td class="align-middle">{{ membre.roles | role }}</td>
+                    <td class="align-middle">
+                       {% include "commun/action.html.twig" with {"id" : membre.id , "update": "register_update" , "delete" : "register_suppr" }  %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colSpan="7">aucun véhicule enregistré pour le moment</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

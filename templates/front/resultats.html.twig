@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des véhicules disponibles{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center">
+        {% include "commun/form-search.html.twig" %}
+    </div>
+    <h1 class="text-center">Liste des véhicules disponibles</h1>
+            {%  for vehicule in vehicules %}
+                <article class="row">
+                    <figure class="offset-3 col-3">
+                        <img src="/upload{{ asset(vehicule.photo)}}" alt="" class="img-fluid img-thumbnail border-dark">
+                    </figure>
+                    <div class="col-3">
+                        <h2>{{vehicule.titre}}</h2>
+                        <p>{{vehicule.prixJournalier | deviseFr}}</p>
+                        <p>{{vehicule.description}}</p>
+                        <a href="{{ path("home_rent" , {"id" : vehicule.id }) }}" class="btn btn-primary">Louer </a>
+                    </div>
+                </article>
+            {% else %}
+                <p class="alert alert-danger">aucun véhicule enregistré pour le moment</p>
+            {% endfor %}
+{% endblock %}

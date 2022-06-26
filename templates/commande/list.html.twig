@@ -1,0 +1,40 @@
+{% extends "back-office.html.twig" %}
+
+{% block title %}Liste des commandes{% endblock %}
+
+{% block body %}
+    <h1>Liste des membres commandes</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width:5%">id</th>
+                <th style="width:15%">membre</th>
+                <th style="width:15%">vehicule</th>
+                <th style="width:20%">debut</th>
+                <th style="width:20%">fin</th>
+                <th style="width:10%">total</th>
+                <th style="width:15%">actions</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            {%  for commande in commandes %}
+                <tr>
+                    <td class="align-middle">{{ commande.id }}</td>
+                    <td class="align-middle">{{ commande.user.id }} - {{ commande.user.pseudo }}</td>
+                    <td class="align-middle">{{ commande.vehicule.id }} - {{ commande.vehicule.titre }}</td>
+                    <td class="align-middle">{{ commande.dateHeureDepart | date("d/m/Y H:i:s")}}</td>
+                    <td class="align-middle">{{ commande.dateHeureFin  | date("d/m/Y H:i:s") }}</td>
+                    <td class="align-middle">{{ commande.prixTotal | deviseFr }}</td>
+                    <td class="align-middle">
+                        {% include "commun/action.html.twig" with {"id" : commande.id , "update": "commande_update" , "delete" : "commande_suppr" }  %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colSpan="7">aucune commande enregistrée pour le moment</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

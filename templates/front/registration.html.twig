@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<h1>Inscription</h1>
+<main class="row">
+    <div class="offset-2 col-4">
+        <h2 class="h3 mb-3 font-weight-normal">Créer un compte membre</h2>
+        {{form(formInscription)}}
+    </div>
+    <div class="col-4">
+        {% include "commun/form-login.html.twig" %}
+    </div>
+</main>
+{% endblock %}

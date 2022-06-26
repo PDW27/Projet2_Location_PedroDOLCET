@@ -1,0 +1,11 @@
+    <form action="{{ path("home_search") }}" method="post">
+    <label for="dt_debut">
+        début réservation
+    </label>
+    <input type="datetime-local" name="dt_debut" id="dt_debut" required>
+    <label for="dt_fin">
+        début fin
+    </label>
+    <input type="datetime-local" name="dt_fin" id="dt_fin" required>
+    <input type="submit" value="rechercher">
+</form>
